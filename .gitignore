@@ -1,0 +1,15 @@
+*.*
+!.gitignore
+!ZyboConstraints.xdc
+
+!*.srcs
+!*/*.srcs/constrs_1/**/*.xdc
+!*/*.srcs/sim_1/new/*.vhd
+!*/*.srcs/sources_1/new/*.vhd
+!*/*.srcs/sources_1/bd/*/hdl/*.vhd
+
+!*.sdk
+!*/*.sdk/*/src/**/*.h
+!*/*.sdk/*/src/**/*.c
+*/*.sdk/bootloader
+Makefile
