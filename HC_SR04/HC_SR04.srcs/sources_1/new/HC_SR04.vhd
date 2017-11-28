@@ -46,59 +46,62 @@ end HC_SR04;
 
 architecture Behavioral of HC_SR04 is
 
-signal counter : STD_LOGIC_VECTOR (10 downto 0) := "00000000000";
-signal counter2 : STD_LOGIC_VECTOR (22 downto 0) := "00000000000000000000000";
+signal counter : STD_LOGIC_VECTOR (10 downto 0) := "00000000000";   --counter de la señal "trigger"
+signal counter2 : STD_LOGIC_VECTOR (22 downto 0) := "00000000000000000000000";  --counter de la señal "echo"
 signal out_sig : STD_LOGIC_VECTOR (22 downto 0) := "00000000000000000000000";
-signal state : STD_LOGIC_VECTOR (2 downto 0) := "000";
+
+type states is (WAIT_START, GENERATE_TRIGGER, READ_ECHO, UPDATE_OUTPUT, WAIT_RESET);
+signal state: states;
 
 begin
 
 sal <= out_sig;
 
-    routine: process(clk, reset)
-        begin            
-            if (reset = '1') then
-                ready <= '0';
-                state <= "000";
-                counter <= "00000000000";
-                counter2 <= "00000000000000000000000";
-                out_sig <= "00000000000000000000000";
-                                
-            elsif (clk'event and clk = '1') then
-                if enable = '1' and state = "000" and counter < 1250 then 
+routine: process(clk, reset)
+begin            
+    if (reset = '1') then
+        ready <= '0';
+        state <= WAIT_START;
+        counter <= "00000000000";
+        counter2 <= "00000000000000000000000";
+        out_sig <= "00000000000000000000000";
+                        
+    elsif (clk'event and clk = '1') then
+        case state is
+            when WAIT_START => 
+                if enable = '1' and counter < 1250 then
                     trigger <= '1';
                     counter <= counter + 1;
-                    ready <= '0';      
-                    out_sig <= (others => '0');            
-                elsif enable = '1' and state = "000" and counter = 1250 then
+                    ready <= '0';
+                    out_sig <= (others => '0');
+                elsif enable = '1' and counter = 1250 then
                     trigger <= '0';
-                    state <= "001";
+                    state <= GENERATE_TRIGGER; 
                 end if;
-                
-                if state = "001" and echo = '1' then
+            when GENERATE_TRIGGER => 
+                if echo = '1' then
                     counter2 <= counter2 + 1;
-                    state <= "010";
+                    state <= READ_ECHO; 
                 end if;
-                
-                if state = "010" and echo = '1' then
-                    counter2 <= counter2 + 1; 
-                elsif state = "010" and echo = '0' then
-                    state <= "011";
+            when READ_ECHO =>
+                if echo = '1' then
+                    counter2 <= counter2 + 1;
+                elsif echo = '0' then
+                    state <= UPDATE_OUTPUT;
                 end if;
-                
-                if state = "011" then
-                    ready <= '1';
-                    out_sig <= counter2;
-                    state <= "111";
-                end if;
-                
-                if state = "111" and enable = '0' then 
-                    state <= "000";
+            when UPDATE_OUTPUT =>
+                ready <= '1';
+                out_sig <= counter2;
+                state <= WAIT_RESET;
+            when WAIT_RESET =>
+                if enable = '0' then 
                     counter <= "00000000000";
                     counter2 <= "00000000000000000000000";
-                end if;                  
-            end if;
-        
-        end process;
+                    state <= WAIT_START;
+                end if;                                          
+        end case;
+    end if;
+
+end process;
 
 end Behavioral;
