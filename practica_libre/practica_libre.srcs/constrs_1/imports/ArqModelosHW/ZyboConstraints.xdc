@@ -294,8 +294,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[3]}]
 
 ##Pmod Header JE
 ##IO_L4P_T0_34
-#set_property PACKAGE_PIN V12 [get_ports {je[0]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {je[0]}]
+set_property PACKAGE_PIN V12 [get_ports {trigger}]
+set_property IOSTANDARD LVCMOS33 [get_ports {trigger}]
 
 ##IO_L18N_T2_34
 #set_property PACKAGE_PIN W16 [get_ports {je[1]}]
@@ -318,8 +318,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[3]}]
 #set_property IOSTANDARD LVCMOS33 [get_ports {je[5]}]
 
 ##IO_L20P_T3_34
-#set_property PACKAGE_PIN T17 [get_ports {je[6]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {je[6]}]
+set_property PACKAGE_PIN T17 [get_ports {echo}]
+set_property IOSTANDARD LVCMOS33 [get_ports {echo}]
 
 ##IO_L7N_T1_34
 #set_property PACKAGE_PIN Y17 [get_ports {je[7]}]

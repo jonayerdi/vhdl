@@ -16,7 +16,6 @@ entity HC_SR04_AXI_v1_0 is
 	);
 	port (
 		-- Users to add ports here
-        reset_out : out std_logic;
         enable_out : out std_logic;
         ready_in : in std_logic;
         data_in : in std_logic_vector(22 downto 0);
@@ -59,7 +58,6 @@ architecture arch_imp of HC_SR04_AXI_v1_0 is
 		C_S_AXI_ADDR_WIDTH	: integer	:= 4
 		);
 		port (
-		reset_out : out std_logic;
         enable_out : out std_logic;
         ready_in : in std_logic;
         data_in : in std_logic_vector(22 downto 0);
@@ -97,7 +95,6 @@ HC_SR04_AXI_v1_0_S00_AXI_inst : HC_SR04_AXI_v1_0_S00_AXI
 		C_S_AXI_ADDR_WIDTH	=> C_S00_AXI_ADDR_WIDTH
 	)
 	port map (
-	    reset_out => reset_out,
         enable_out => enable_out,
         ready_in => ready_in,
         data_in => data_in,

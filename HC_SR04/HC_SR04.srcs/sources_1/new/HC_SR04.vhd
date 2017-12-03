@@ -35,7 +35,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity HC_SR04 is
     Port (                     
-            clk : in STD_LOGIC;    
+            clk : in STD_LOGIC; --el clk debe ser de 125MHz
             reset : in STD_LOGIC;    
             enable : in STD_LOGIC;
             echo : in STD_LOGIC;
@@ -50,7 +50,7 @@ signal counter : STD_LOGIC_VECTOR (10 downto 0) := "00000000000";   --counter de
 signal counter2 : STD_LOGIC_VECTOR (22 downto 0) := "00000000000000000000000";  --counter de la señal "echo"
 signal out_sig : STD_LOGIC_VECTOR (22 downto 0) := "00000000000000000000000";
 
-type states is (WAIT_START, GENERATE_TRIGGER, READ_ECHO, UPDATE_OUTPUT, WAIT_RESET);
+type states is (WAIT_START, WAIT_ECHO, READ_ECHO, UPDATE_OUTPUT, WAIT_RESET);
 signal state: states;
 
 begin
@@ -61,10 +61,10 @@ routine: process(clk, reset)
 begin            
     if (reset = '1') then
         ready <= '0';
-        state <= WAIT_START;
         counter <= "00000000000";
         counter2 <= "00000000000000000000000";
         out_sig <= "00000000000000000000000";
+        state <= WAIT_START;
                         
     elsif (clk'event and clk = '1') then
         case state is
@@ -76,9 +76,9 @@ begin
                     out_sig <= (others => '0');
                 elsif enable = '1' and counter = 1250 then
                     trigger <= '0';
-                    state <= GENERATE_TRIGGER; 
+                    state <= WAIT_ECHO; 
                 end if;
-            when GENERATE_TRIGGER => 
+            when WAIT_ECHO => 
                 if echo = '1' then
                     counter2 <= counter2 + 1;
                     state <= READ_ECHO; 
@@ -98,7 +98,7 @@ begin
                     counter <= "00000000000";
                     counter2 <= "00000000000000000000000";
                     state <= WAIT_START;
-                end if;                                          
+                end if;                                                          
         end case;
     end if;
 

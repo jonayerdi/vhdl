@@ -1,7 +1,7 @@
 --Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
---Date        : Thu Nov 23 14:33:20 2017
+--Date        : Thu Nov 30 15:07:29 2017
 --Host        : equipo running 64-bit major release  (build 9200)
 --Command     : generate_target practica_libre_wrapper.bd
 --Design      : practica_libre_wrapper
@@ -34,8 +34,10 @@ entity practica_libre_wrapper is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
+    echo : in STD_LOGIC;
     led_tri_io : inout STD_LOGIC_VECTOR ( 3 downto 0 );
-    sw_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    sw_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    trigger : out STD_LOGIC
   );
 end practica_libre_wrapper;
 
@@ -66,7 +68,9 @@ architecture STRUCTURE of practica_libre_wrapper is
     SW_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     LED_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     LED_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    LED_tri_t : out STD_LOGIC_VECTOR ( 3 downto 0 )
+    LED_tri_t : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    trigger : out STD_LOGIC;
+    echo : in STD_LOGIC
   );
   end component practica_libre;
   component IOBUF is
@@ -157,6 +161,8 @@ practica_libre_i: component practica_libre
       LED_tri_t(2) => led_tri_t_2(2),
       LED_tri_t(1) => led_tri_t_1(1),
       LED_tri_t(0) => led_tri_t_0(0),
-      SW_tri_i(3 downto 0) => sw_tri_i(3 downto 0)
+      SW_tri_i(3 downto 0) => sw_tri_i(3 downto 0),
+      echo => echo,
+      trigger => trigger
     );
 end STRUCTURE;

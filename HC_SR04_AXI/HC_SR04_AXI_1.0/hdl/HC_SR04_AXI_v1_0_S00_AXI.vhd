@@ -16,7 +16,6 @@ entity HC_SR04_AXI_v1_0_S00_AXI is
 	);
 	port (
 		-- Users to add ports here
-        reset_out : out std_logic;
         enable_out : out std_logic;
         ready_in : in std_logic;
         data_in : in std_logic_vector(22 downto 0);
@@ -356,7 +355,10 @@ begin
 	    loc_addr := axi_araddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
 	    case loc_addr is
 	      when b"00" =>
-	        reg_data_out <= slv_reg0;
+	        reg_data_out(1) <= ready_in;
+	        reg_data_out(24 downto 2) <= data_in;
+	        reg_data_out(25) <= presence_in;
+	        reg_data_out(31 downto 26) <= (others => '0');
 	      when b"01" =>
 	        reg_data_out <= slv_reg1;
 	      when b"10" =>
@@ -386,13 +388,8 @@ begin
 	  end if;
 	end process;
 
-
 	-- Add user logic here
-    reset_out <= slv_reg0(0);
-    enable_out <= slv_reg0(1);
-    slv_reg0(2) <= ready_in;
-    slv_reg0(25 downto 3) <= data_in;
-    slv_reg0(26) <= presence_in;
+    enable_out <= slv_reg0(0);
 	-- User logic ends
 
 end arch_imp;
