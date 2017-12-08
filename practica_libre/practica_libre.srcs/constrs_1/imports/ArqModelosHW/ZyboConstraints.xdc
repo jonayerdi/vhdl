@@ -11,20 +11,20 @@
 
 ##Switches
 ##IO_L19N_T3_VREF_35
-set_property PACKAGE_PIN G15 [get_ports {sw_tri_i[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_i[0]}]
+set_property PACKAGE_PIN G15 [get_ports {sw_tri_io[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_io[0]}]
 
 ##IO_L24P_T3_34
-set_property PACKAGE_PIN P15 [get_ports {sw_tri_i[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_i[1]}]
+set_property PACKAGE_PIN P15 [get_ports {sw_tri_io[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_io[1]}]
 
 ##IO_L4N_T0_34
-set_property PACKAGE_PIN W13 [get_ports {sw_tri_i[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_i[2]}]
+set_property PACKAGE_PIN W13 [get_ports {sw_tri_io[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_io[2]}]
 
 ##IO_L9P_T1_DQS_34
-set_property PACKAGE_PIN T16 [get_ports {sw_tri_i[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_i[3]}]
+set_property PACKAGE_PIN T16 [get_ports {sw_tri_io[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_io[3]}]
 
 ##Buttons
 ##IO_L20N_T3_34
@@ -45,20 +45,20 @@ set_property IOSTANDARD LVCMOS33 [get_ports {sw_tri_i[3]}]
 
 ##LEDs
 ##IO_L23P_T3_35
-set_property PACKAGE_PIN M14 [get_ports {led_tri_io[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[0]}]
+set_property PACKAGE_PIN M14 [get_ports {led[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
 
 ##IO_L23N_T3_35
-set_property PACKAGE_PIN M15 [get_ports {led_tri_io[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[1]}]
+set_property PACKAGE_PIN M15 [get_ports {led[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[1]}]
 
 ##IO_0_35
-set_property PACKAGE_PIN G14 [get_ports {led_tri_io[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[2]}]
+set_property PACKAGE_PIN G14 [get_ports {led[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[2]}]
 
 ##IO_L3N_T0_DQS_AD1N_35
-set_property PACKAGE_PIN D18 [get_ports {led_tri_io[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {led_tri_io[3]}]
+set_property PACKAGE_PIN D18 [get_ports {led[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[3]}]
 
 ##I2S Audio Codec
 ##IO_L12N_T1_MRCC_35
@@ -298,8 +298,8 @@ set_property PACKAGE_PIN V12 [get_ports {trigger}]
 set_property IOSTANDARD LVCMOS33 [get_ports {trigger}]
 
 ##IO_L18N_T2_34
-#set_property PACKAGE_PIN W16 [get_ports {je[1]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {je[1]}]
+set_property PACKAGE_PIN W16 [get_ports {echo}]
+set_property IOSTANDARD LVCMOS33 [get_ports {echo}]
 
 ##IO_25_35
 #set_property PACKAGE_PIN J15 [get_ports {je[2]}]
@@ -318,8 +318,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports {trigger}]
 #set_property IOSTANDARD LVCMOS33 [get_ports {je[5]}]
 
 ##IO_L20P_T3_34
-set_property PACKAGE_PIN T17 [get_ports {echo}]
-set_property IOSTANDARD LVCMOS33 [get_ports {echo}]
+#set_property PACKAGE_PIN T17 [get_ports {je[6]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {je[6]}]
 
 ##IO_L7N_T1_34
 #set_property PACKAGE_PIN Y17 [get_ports {je[7]}]
